@@ -1,0 +1,9 @@
+<?php 
+include_once 'dbconnect.php'; 
+if($_GET['knygos_id']>0) 
+{  
+$id = mysql_real_escape_string($_GET['knygos_id']);   
+$result = mysql_query("SELECT * FROM egle_knygos WHERE id = ".$id);  
+} 
+else { echo "id negautas";}  
+include_once 'template_aprasas.php'; ?>
