@@ -1,0 +1,68 @@
+<!DOCTYPE html> 
+<html> 
+<head> <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<title>Knygų sąrašas</title> 
+<link rel="stylesheet" href="style.css" type="text/css" /> 
+</head>   
+<body>  
+<center> 
+<form method="post"> 
+<tr> <td><input type="text" name="search" placeholder="Įveskite pavadinimą" /> 
+<button type="submit" name="btn-search" >Ieškoti</button></td>  </tr> </form>  
+<table align="center" width="70%" border="0">  
+<h1> Knygų sąrašas </h1>
+<?php  
+if ($count > 0) { echo "<tr><th>Pavadinimas</th><th>Autorius</th><th>Data</th></tr>";      
+echo "<tr>";  
+while ($row = mysql_fetch_assoc($result)) {   
+?>  
+<td><a href='aprasas.php?knygos_id=<?php echo $row['id'];?>'>  
+<?php    
+echo $row['pavadinimas']."</td></a>";  
+echo "<td>".$row['autorius']."</td>";  
+echo "<td>".$row['data']."</td></tr>";  //echo "<td>".$row['zanras']."</td>";  
+}   
+echo "</table></form></div></center>";} 
+else {    echo "0 results";}
+/****** puslapiavimo nuorodos ******/
+// range of num links to show
+$range = 4;
+// if not on page 1, don't show back links
+if ($currentpage > 1) {  
+// show << link to go back to page 1   
+echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=1'><<</a> ";   
+// get previous page num   
+$prevpage = $currentpage - 1;   
+// show < link to go back to 1 page   
+echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$prevpage'><</a> ";
+} // end if 
+// loop to show links to range of pages around current page
+for ($x = ($currentpage - $range); $x < (($currentpage + $range) + 1); $x++) 
+{   
+// if it's a valid page number...   
+if (($x > 0) && ($x <= $totalpages)) {      
+// if we're on current page...      
+if ($x == $currentpage) {         
+// 'highlight' it but don't make a link         
+echo " [<b>$x</b>] ";      
+// if not current page...     
+} 
+else {         
+// make it a link         
+echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$x'>$x</a> ";     
+} // end else   
+} // end if 
+} // end for                 
+// if not on last page, show forward and last page links        
+if ($currentpage != $totalpages) 
+{   
+// get next page   
+$nextpage = $currentpage + 1;    
+// echo forward link for next page    
+echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$nextpage'>></a> ";   
+// echo forward link for lastpage   
+echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$totalpages'>>></a> ";
+} // end if
+/****** end build pagination links ******/
+?>  
+</body> </html>

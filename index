@@ -1,0 +1,53 @@
+<?php include_once 'dbconnect.php';   
+//paieskos sistema
+if(isset($_POST['btn-search'])) 
+{    
+$search = mysql_real_escape_string($_POST['search']);  
+$search_exploded = explode ( " ", $search );   
+$x = 0; //laikinas kintamasis  
+foreach( $search_exploded as $search_each )   
+{   
+$x++; $construct = " ";  
+if( $x == 1 )   
+{ $construct .= "pavadinimas LIKE '%$search_each%'"; }  
+else { $construct .= "AND pavadinimas LIKE '%$search_each%'";}  
+}   
+$construct = " SELECT * FROM egle_knygos WHERE $construct ";   
+$result = mysql_query( $construct );  
+$count = mysql_num_rows($result);   
+} 
+else{ $result1 = mysql_query("SELECT * FROM egle_knygos"); 
+
+//puslapiavimas
+$r = mysql_num_rows($result1);
+$numrows = $r;
+// number of rows to show per page
+$rowsperpage = 10;
+// find out total pages
+$totalpages = ceil($numrows / $rowsperpage);
+// get the current page or set a default
+if (isset($_GET['currentpage']) && is_numeric($_GET['currentpage'])) 
+{   
+// cast var as int   
+$currentpage = (int) $_GET['currentpage'];}
+else {   
+// default page num   
+$currentpage = 1;
+} 
+// if current page is greater than total pages...
+if ($currentpage > $totalpages) 
+{   // set current page to last page   
+$currentpage = $totalpages;}
+// if current page is less than first page...
+if ($currentpage < 1) {   /
+/ set current page to first page   
+$currentpage = 1;} 
+// the offset of the list, based on current page
+$offset = ($currentpage - 1) * $rowsperpage;
+// get the info from the db 
+$sql = "SELECT * FROM egle_knygos LIMIT $offset, $rowsperpage";
+$result = mysql_query($sql);
+$count = mysql_num_rows($result);  
+} 
+include_once 'template_index.php'; 
+?>
