@@ -1,0 +1,20 @@
+<!DOCTYPE html> 
+<html> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<title>Knygų sąrašas</title> 
+<link rel="stylesheet" href="style.css" type="text/css" /> </head>   
+<body>  <center>  
+<table align="center" width="70%" border="0"> 
+<h1> Knygos aprašas </h1>   
+<?php
+$row=mysql_fetch_array($result); 
+echo "<h2>".$row['pavadinimas']."</h2>"; 
+echo "<tr><th>Autorius</th><th>Data</th><th>Žanras</th></tr>";         
+echo "<tr>";  
+echo "<td>".$row['autorius']."</td>";  
+echo "<td>".$row['data']."</td>";  
+echo "<td>".$row['zanras']."</td></tr></table>";  
+echo "<table><tr><td>".$row['aprasas']."</td></tr>";   
+echo "</table></form></div></center>";?>  
+</body> </html>
