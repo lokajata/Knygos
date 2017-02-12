@@ -13,9 +13,7 @@
 <h1> Knygų sąrašas </h1>
 <?php  
 if ($count > 0) { 
-echo "<tr><th><a href='index.php?rikiavimas=pavadinimas'>Pavadinimas</a></th>"; 
-echo "<th><a href='index.php?rikiavimas=data'>Data</a></th></tr>";       
-echo "<th><a href='index.php?rikiavimas=data'>Data</a></th></tr>";      
+echo "<tr><th>Pavadinimas</th><th>Autorius</th><th>Data</th></tr>";      
 echo "<tr>";  
 while ($row = mysql_fetch_assoc($result)) {   
 ?>  
