@@ -1,0 +1,12 @@
+ <?php 
+ error_reporting( E_ALL & ~E_DEPRECATED & ~E_NOTICE );
+ $db_raktas=mysql_connect("localhost","kilimuva_itabc","IsspaudymasUnifikacija");
+ mysql_set_charset('utf8',$db_raktas); 
+ 
+ if(!$db_raktas) 
+ { 
+ die('oops connection problem ! --> '.mysql_error());
+ } 
+ if(!mysql_select_db("kilimuva_itabc")) 
+ { die('oops database selection problem ! --> '.mysql_error()); } 
+ ?> 
