@@ -1,10 +1,6 @@
 <?php
  include_once 'dbconnect.php';  
- $rikiavimas = "id"; 
- if (isset($_GET['rikiavimas']))
- {
- $rikiavimas = $_GET['rikiavimas']; 
- }  
+
  if(isset($_POST['btn-search'])) 
  {    
  $search = mysql_real_escape_string($_POST['search']);  
@@ -18,7 +14,7 @@
  { $construct .= "pavadinimas LIKE '%$search_each%'"; }  
  else { $construct .= "AND pavadinimas LIKE '%$search_each%'"; } 
  }  
- $construct = " SELECT * FROM egle_knygos WHERE $construct ORDER BY $rikiavimas";   
+ $construct = " SELECT * FROM egle_knygos WHERE $construct";   
  $result = mysql_query( $construct ); 
  $count = mysql_num_rows($result);   
  } 
@@ -55,7 +51,7 @@ $currentpage = 1;
 // the offset of the list, based on current page 
 $offset = ($currentpage - 1) * $rowsperpage;
 // get the info from the db 
-$sql = "SELECT * FROM egle_knygos ORDER BY $rikiavimas LIMIT $offset, $rowsperpage";
+$sql = "SELECT * FROM egle_knygos LIMIT $offset, $rowsperpage";
 $result = mysql_query($sql);
 $count = mysql_num_rows($result);  
 }  
