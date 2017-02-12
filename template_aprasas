@@ -15,6 +15,7 @@ echo "<tr>";  
 echo "<td>".$row['autorius']."</td>";  
 echo "<td>".$row['data']."</td>";  
 echo "<td>".$row['zanras']."</td></tr></table>";  
-echo "<table><tr><td>".$row['aprasas']."</td></tr>";   
-echo "</table></form></div></center>";?>  
+echo "<table><tr><td>".$row['aprasas']."</td></tr>";  
+?>
+</table></form></div></center>  
 </body> </html>
